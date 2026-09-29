@@ -5,26 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teerasak Khompae - Portfolio</title>
 
-    <!-- Fonts: Inter (Eng) & Prompt (Thai) -->
+    <!-- Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Prompt:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
     <style>
-        /* Apple Design System */
         :root {
             --apple-bg: #ffffff;
             --apple-card: #f5f5f7;
             --apple-text: #1d1d1f;
             --apple-subtext: #86868b;
             --apple-blue: #0071e3;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
@@ -43,19 +46,21 @@
             font-family: 'Inter', 'Prompt', sans-serif;
         }
 
-        /* Glassmorphism Navbar */
+        /* Navbar */
         .nav-glass {
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.82);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        /* Animations */
+        /* Reveal */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition:
+                opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .reveal.active {
@@ -63,48 +68,49 @@
             transform: translateY(0);
         }
 
-        /* Smooth language transition */
         [data-i18n] {
             transition: opacity 0.18s ease;
         }
 
-        /* Bento Card Style */
+        /* Bento Card */
         .bento-card {
             background-color: var(--apple-card);
             border-radius: 28px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                background-color 0.3s ease,
+                border-color 0.3s ease;
         }
 
         .bento-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.09);
             background-color: #ffffff;
-            border: 1px solid rgba(0,0,0,0.05);
+            border-color: rgba(0, 0, 0, 0.05);
             z-index: 10;
         }
 
         /* Tool Pill */
         .tool-pill {
-            background-color: #fff;
+            background-color: #ffffff;
             border: 1px solid #e5e7eb;
-            padding: 6px 12px;
+            padding: 6px 11px;
             border-radius: 12px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #4b5563;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             font-weight: 500;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
         }
 
-        .tool-pill i {
-            color: #6b7280;
-        }
-
-        /* iOS Toggle Switch */
+        /* Toggle */
         .toggle-checkbox {
             display: none;
         }
@@ -126,10 +132,10 @@
             left: 2px;
             width: 24px;
             height: 24px;
-            background-color: white;
+            background-color: #ffffff;
             border-radius: 50%;
-            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
         }
 
         .toggle-checkbox:checked + .toggle-label {
@@ -140,22 +146,10 @@
             transform: translateX(20px);
         }
 
-        /* Icon Colors */
-        .icon-line {
-            color: #06C755;
-        }
-
-        .icon-fb {
-            color: #0084FF;
-        }
-
-        .icon-wa {
-            color: #25D366;
-        }
-
-        /* Active language label */
         .lang-label {
-            transition: color 0.25s ease, font-weight 0.25s ease;
+            transition:
+                color 0.25s ease,
+                font-weight 0.25s ease;
         }
 
         .lang-active {
@@ -167,1606 +161,1672 @@
             color: #9ca3af !important;
             font-weight: 600;
         }
+
+        .icon-line {
+            color: #06C755;
+        }
+
+        .icon-fb {
+            color: #0084FF;
+        }
+
+        .icon-wa {
+            color: #25D366;
+        }
     </style>
 </head>
 
 <body class="antialiased">
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 nav-glass transition-all duration-300 top-0">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold tracking-tight">TK.</a>
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
 
-            <div class="flex items-center gap-6">
-                <div class="hidden md:flex gap-6 text-sm font-medium text-gray-500">
-                    <a
-                        href="#aboutus"
-                        class="hover:text-black transition"
-                        data-i18n="nav_aboutus"
-                    >
-                        เกี่ยวกับฉัน
-                    </a>
+<nav class="fixed w-full z-50 nav-glass transition-all duration-300 top-0">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
 
-                    <a
-                        href="#skills"
-                        class="hover:text-black transition"
-                        data-i18n="nav_skills"
-                    >
-                        ทักษะ
-                    </a>
+        <a href="#" class="text-xl font-bold tracking-tight">
+            TK.
+        </a>
 
-                    <a
-                        href="#experience"
-                        class="hover:text-black transition"
-                        data-i18n="nav_exp"
-                    >
-                        ประสบการณ์
-                    </a>
-                </div>
+        <div class="flex items-center gap-6">
 
-                <!-- Language Switcher -->
-                <div class="flex items-center gap-2">
-                    <span
-                        id="label-th"
-                        class="lang-label text-xs font-semibold lang-active"
-                    >
-                        TH
-                    </span>
+            <div class="hidden md:flex gap-6 text-sm font-medium text-gray-500">
 
-                    <input
-                        type="checkbox"
-                        id="lang-toggle"
-                        class="toggle-checkbox"
-                        aria-label="Switch language"
-                    >
+                <a
+                    href="#aboutus"
+                    class="hover:text-black transition"
+                    data-i18n="nav_aboutus"
+                >
+                    เกี่ยวกับฉัน
+                </a>
 
-                    <label
-                        for="lang-toggle"
-                        class="toggle-label"
-                        title="Switch language"
-                    ></label>
+                <a
+                    href="#skills"
+                    class="hover:text-black transition"
+                    data-i18n="nav_skills"
+                >
+                    ทักษะ
+                </a>
 
-                    <span
-                        id="label-en"
-                        class="lang-label text-xs font-semibold lang-inactive"
-                    >
-                        EN
-                    </span>
-                </div>
-            </div>
-        </div>
-    </nav>
+                <a
+                    href="#experience"
+                    class="hover:text-black transition"
+                    data-i18n="nav_exp"
+                >
+                    ประสบการณ์
+                </a>
 
-
-    <!-- Hero Section -->
-    <section
-        id="aboutus"
-        class="pt-32 pb-10 px-6 min-h-[90vh] flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto gap-12"
-    >
-
-        <!-- Left: Text Content -->
-        <div class="flex-1 text-center md:text-left reveal active z-10">
-
-            <div
-                class="inline-block px-4 py-1.5 bg-gray-100 rounded-full text-xs font-bold text-gray-500 mb-6 tracking-wide uppercase"
-                data-i18n="interested_tag"
-            >
-                ตำแหน่งที่สนใจ: Marketing Manager • Digital Marketing Lead
             </div>
 
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-[1.1]">
-                Teerasak Khompae<br>
+
+            <!-- Language -->
+            <div class="flex items-center gap-2">
 
                 <span
-                    class="text-gray-400 text-4xl md:text-6xl"
-                    data-i18n="hero_role"
+                    id="label-th"
+                    class="lang-label text-xs font-semibold lang-active"
                 >
-                    นักกลยุทธ์การตลาด
+                    TH
                 </span>
-            </h1>
+
+                <input
+                    type="checkbox"
+                    id="lang-toggle"
+                    class="toggle-checkbox"
+                    aria-label="Switch language"
+                >
+
+                <label
+                    for="lang-toggle"
+                    class="toggle-label"
+                    title="Switch language"
+                ></label>
+
+                <span
+                    id="label-en"
+                    class="lang-label text-xs font-semibold lang-inactive"
+                >
+                    EN
+                </span>
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section
+    id="aboutus"
+    class="pt-32 pb-10 px-6 min-h-[90vh] flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto gap-12"
+>
+
+    <!-- Text -->
+    <div class="flex-1 text-center md:text-left reveal active z-10">
+
+        <div
+            class="inline-block px-4 py-1.5 bg-gray-100 rounded-full text-xs font-bold text-gray-500 mb-6 tracking-wide uppercase"
+            data-i18n="interested_tag"
+        >
+            ตำแหน่งที่สนใจ: Marketing Manager • Digital Marketing Lead
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-[1.1]">
+
+            Teerasak Khompae<br>
+
+            <span
+                class="text-gray-400 text-4xl md:text-6xl"
+                data-i18n="hero_role"
+            >
+                นักกลยุทธ์การตลาด
+            </span>
+
+        </h1>
+
+        <p
+            class="text-lg md:text-xl text-gray-500 max-w-lg mb-8 font-light leading-relaxed"
+            data-i18n="hero_desc"
+        >
+            ผสานความคิดสร้างสรรค์ทางการตลาด
+            เข้ากับเทคโนโลยี IT เพื่อผลลัพธ์ที่เหนือกว่า
+            ด้วยกลยุทธ์ที่ขับเคลื่อนด้วยข้อมูล
+        </p>
+
+
+        <div class="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
+
+            <a
+                href="#contact"
+                class="px-8 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition shadow-lg"
+                data-i18n="btn_contact"
+            >
+                ติดต่อร่วมงาน
+            </a>
+
+            <a
+                href="https://www.linkedin.com/in/teerasak-khompae-ab6ab115b"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-8 py-3 bg-white border border-gray-200 text-black rounded-full font-medium hover:bg-gray-50 transition"
+            >
+                <i class="fab fa-linkedin mr-2"></i>
+                LinkedIn
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Image -->
+    <div class="flex-1 relative w-full max-w-md md:max-w-lg reveal active">
+
+        <div class="relative">
+
+            <div
+                class="absolute inset-0 bg-gradient-to-tr from-gray-200 to-gray-50 rounded-[40px] transform rotate-3 scale-95 z-0"
+            ></div>
+
+            <img
+                src="https://mkt.glovetex.com/convertlink/drive-image.php?id=1FSOtfjs0dmUEEDzc04T92q5E-eg93IwK&w=2560&q=85"
+                alt="Teerasak Khompae"
+                class="relative z-10 w-full h-auto rounded-[40px]"
+            >
+
+            <div
+                class="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md p-6 rounded-3xl shadow-xl z-20 animate-bounce"
+                style="animation-duration: 4s;"
+            >
+
+                <p
+                    class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1"
+                    data-i18n="experience_label"
+                >
+                    ประสบการณ์
+                </p>
+
+                <p
+                    class="text-3xl font-bold text-black"
+                    data-i18n="experience_years"
+                >
+                    9+ ปี
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SKILLS
+========================================================= -->
+
+<section id="skills" class="py-24 px-6 bg-white">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center mb-16 reveal">
+
+            <h2
+                class="text-4xl font-bold mb-4"
+                data-i18n="skills_title"
+            >
+                ทักษะและความเชี่ยวชาญ
+            </h2>
 
             <p
-                class="text-lg md:text-xl text-gray-500 max-w-lg mb-8 font-light leading-relaxed"
-                data-i18n="hero_desc"
+                class="text-gray-500"
+                data-i18n="skills_subtitle"
             >
-                ผสานความคิดสร้างสรรค์ทางการตลาด
-                เข้ากับเทคโนโลยี IT เพื่อผลลัพธ์ที่เหนือกว่า
-                ด้วยกลยุทธ์ที่ขับเคลื่อนด้วยข้อมูล
+                แสดงภาพรวมความสามารถหลักและเครื่องมือที่เชี่ยวชาญ
             </p>
 
-            <div class="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
-                <a
-                    href="#contact"
-                    class="px-8 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition shadow-lg"
-                    data-i18n="btn_contact"
-                >
-                    ติดต่อร่วมงาน
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/in/teerasak-khompae-ab6ab115b"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="px-8 py-3 bg-white border border-gray-200 text-black rounded-full font-medium hover:bg-gray-50 transition"
-                >
-                    <i class="fab fa-linkedin mr-2"></i>
-                    LinkedIn
-                </a>
-            </div>
         </div>
 
 
-        <!-- Right: Profile Image -->
-        <div class="flex-1 relative w-full max-w-md md:max-w-lg reveal active delay-100">
-            <div class="relative">
+        <!-- =================================================
+             CORE SKILLS - 3 COLUMNS
+        ================================================== -->
 
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14 reveal items-stretch"
+        >
+
+
+            <!-- =============================================
+                 SEO & SEM
+            ============================================== -->
+
+            <div
+                class="bento-card p-7 lg:p-8 h-full relative overflow-hidden group flex flex-col"
+            >
+
+                <!-- Glow -->
                 <div
-                    class="absolute inset-0 bg-gradient-to-tr from-gray-200 to-gray-50 rounded-[40px] transform rotate-3 scale-95 z-0"
+                    class="absolute right-0 top-0 w-48 h-48 bg-blue-50 rounded-full blur-3xl -mr-12 -mt-12 transition group-hover:bg-blue-100"
                 ></div>
 
-                <img
-                    src="https://mkt.glovetex.com/convertlink/drive-image.php?id=1FSOtfjs0dmUEEDzc04T92q5E-eg93IwK&w=2560&q=85"
-                    alt="Teerasak Khompae"
-                    class="relative z-10 w-full h-auto rounded-[40px]"
-                >
 
-                <div
-                    class="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md p-6 rounded-3xl shadow-xl z-20 animate-bounce"
-                    style="animation-duration: 4s;"
-                >
+                <div class="relative z-10 flex flex-col h-full">
+
+                    <!-- Top -->
+                    <div class="flex items-start justify-between gap-4">
+
+                        <div
+                            class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex-shrink-0 flex items-center justify-center text-2xl text-white shadow-lg mb-6"
+                        >
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+
+                        <span
+                            class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[11px] font-bold uppercase tracking-wide whitespace-nowrap"
+                            data-i18n="primary_skill"
+                        >
+                            ทักษะหลัก
+                        </span>
+
+                    </div>
+
+
+                    <h3 class="text-xl lg:text-2xl font-bold mb-3">
+                        SEO & SEM Strategy
+                    </h3>
+
+
                     <p
-                        class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1"
-                        data-i18n="experience_label"
+                        class="text-sm text-gray-500 mb-6 leading-relaxed"
+                        data-i18n="hard_seo_detail"
                     >
-                        ประสบการณ์
+                        เชี่ยวชาญด้านการวางแผน Keyword และการทำ Technical SEO
+                        เพื่อเพิ่มยอดผู้เข้าชมแบบ Organic รวมถึงการบริหารโฆษณา
+                        SEM ให้คุ้มค่าที่สุด
                     </p>
 
-                    <p
-                        class="text-3xl font-bold text-black"
-                        data-i18n="experience_years"
-                    >
-                        9+ ปี
-                    </p>
+
+                    <!-- Push pills to bottom -->
+                    <div class="flex flex-wrap gap-2 mt-auto">
+
+                        <span
+                            class="tool-pill border-blue-200 bg-blue-50"
+                        >
+                            <i class="fas fa-search text-blue-500"></i>
+                            Keyword Research
+                        </span>
+
+                        <span
+                            class="tool-pill border-blue-200 bg-blue-50"
+                        >
+                            <i class="fab fa-google text-blue-500"></i>
+                            Google Ads
+                        </span>
+
+                        <span
+                            class="tool-pill border-blue-200 bg-blue-50"
+                        >
+                            <i class="fas fa-bullseye text-blue-500"></i>
+                            Conversion Opt.
+                        </span>
+
+                    </div>
+
                 </div>
 
             </div>
+
+
+            <!-- =============================================
+                 DATA & RESEARCH
+            ============================================== -->
+
+            <div
+                class="bento-card p-7 lg:p-8 h-full relative overflow-hidden group flex flex-col"
+            >
+
+                <div
+                    class="absolute right-0 bottom-0 w-48 h-48 bg-green-50 rounded-full blur-2xl -mr-10 -mb-10 transition group-hover:bg-green-100"
+                ></div>
+
+
+                <div class="relative z-10 flex flex-col h-full">
+
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-400 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg mb-6"
+                    >
+                        <i class="fas fa-magnifying-glass-chart"></i>
+                    </div>
+
+
+                    <h3 class="text-xl lg:text-2xl font-bold mb-3">
+                        Data & Research
+                    </h3>
+
+
+                    <p
+                        class="text-sm text-gray-500 mb-6 leading-relaxed"
+                        data-i18n="hard_data_detail"
+                    >
+                        เปลี่ยนข้อมูลดิบให้เป็นกลยุทธ์ที่จับต้องได้
+                        ด้วยการวิเคราะห์เชิงลึกและการวิจัยตลาด
+                    </p>
+
+
+                    <div class="space-y-3 mt-auto">
+
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+
+                            <i class="fas fa-check-circle text-green-500"></i>
+
+                            <span>
+                                Data Analysis
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+
+                            <i class="fas fa-check-circle text-green-500"></i>
+
+                            <span>
+                                Market Research
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 AI & AUTOMATION
+            ============================================== -->
+
+            <div
+                class="bento-card p-7 lg:p-8 h-full relative overflow-hidden group flex flex-col"
+            >
+
+                <div
+                    class="absolute left-0 top-0 w-48 h-48 bg-purple-50 rounded-full blur-2xl -ml-10 -mt-10 transition group-hover:bg-purple-100"
+                ></div>
+
+
+                <div class="relative z-10 flex flex-col h-full">
+
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-purple-600 to-indigo-400 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg mb-6"
+                    >
+                        <i class="fas fa-robot"></i>
+                    </div>
+
+
+                    <h3 class="text-xl lg:text-2xl font-bold mb-3">
+                        AI & Automation
+                    </h3>
+
+
+                    <p
+                        class="text-sm text-gray-500 mb-6 leading-relaxed"
+                        data-i18n="hard_ai_detail"
+                    >
+                        นำเทคโนโลยี AI มาใช้สร้างระบบตอบกลับอัตโนมัติ
+                        ลดภาระงานและเพิ่มความพึงพอใจให้ลูกค้า
+                    </p>
+
+
+                    <div class="flex flex-wrap gap-2 mt-auto">
+
+                        <span
+                            class="tool-pill border-purple-200 bg-purple-50"
+                        >
+                            <i class="fas fa-bolt text-purple-500"></i>
+                            Quick Reply
+                        </span>
+
+                        <span
+                            class="tool-pill border-purple-200 bg-purple-50"
+                        >
+                            <i class="fas fa-code-branch text-purple-500"></i>
+                            Bot Flows
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-    </section>
 
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-24 px-6 bg-white">
-        <div class="max-w-7xl mx-auto">
+        <!-- =================================================
+             TOOLS
+        ================================================== -->
 
-            <div class="text-center mb-16 reveal">
-                <h2
-                    class="text-4xl font-bold mb-4"
-                    data-i18n="skills_title"
-                >
-                    ทักษะและความเชี่ยวชาญ
-                </h2>
+        <h3
+            class="text-2xl font-bold mb-6 px-2 flex items-center gap-3 reveal"
+        >
+
+            <i class="fas fa-toolbox text-gray-400"></i>
+
+            <span data-i18n="tools_header">
+                เครื่องมือและซอฟต์แวร์
+            </span>
+
+        </h3>
+
+
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal"
+        >
+
+            <!-- Office -->
+            <div class="bento-card p-6">
+
+                <div class="flex items-center gap-3 mb-4">
+
+                    <div
+                        class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600"
+                    >
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+
+                    <h4 class="font-bold">
+                        Microsoft Office
+                    </h4>
+
+                </div>
 
                 <p
-                    class="text-gray-500"
-                    data-i18n="skills_subtitle"
+                    class="text-xs text-gray-500 mb-4 min-h-[40px]"
+                    data-i18n="tool_office_desc"
                 >
-                    แสดงภาพรวมความสามารถหลักและเครื่องมือที่เชี่ยวชาญ
+                    จัดการเอกสารขั้นสูงและการทำรายงานข้อมูลที่ซับซ้อน
                 </p>
-            </div>
 
-
-            <!-- 1. HARD SKILLS -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 reveal">
-
-                <!-- SEO/SEM -->
-                <div class="bento-card p-8 md:col-span-2 relative overflow-hidden group">
-
-                    <div
-                        class="absolute right-0 top-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -mr-16 -mt-16 transition group-hover:bg-blue-100"
-                    ></div>
-
-                    <div class="relative z-10">
-
-                        <div class="flex items-start justify-between">
-
-                            <div
-                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-3xl text-white shadow-lg mb-6"
-                            >
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-
-                            <span
-                                class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold uppercase tracking-wide"
-                                data-i18n="primary_skill"
-                            >
-                                ทักษะหลัก
-                            </span>
-                        </div>
-
-                        <h3 class="text-2xl font-bold mb-2">
-                            SEO & SEM Strategy
-                        </h3>
-
-                        <p
-                            class="text-gray-500 mb-6 leading-relaxed max-w-lg"
-                            data-i18n="hard_seo_detail"
-                        >
-                            เชี่ยวชาญด้านการวางแผน Keyword และการทำ Technical SEO
-                            เพื่อเพิ่มยอดผู้เข้าชมแบบ Organic รวมถึงการบริหารโฆษณา
-                            SEM ให้คุ้มค่าที่สุด
-                        </p>
-
-                        <div class="flex flex-wrap gap-3">
-
-                            <span class="tool-pill border-blue-200 bg-blue-50">
-                                <i class="fas fa-search text-blue-500"></i>
-                                Keyword Research
-                            </span>
-
-                            <span class="tool-pill border-blue-200 bg-blue-50">
-                                <i class="fab fa-google text-blue-500"></i>
-                                Google Ads
-                            </span>
-
-                            <span class="tool-pill border-blue-200 bg-blue-50">
-                                <i class="fas fa-bullseye text-blue-500"></i>
-                                Conversion Opt.
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Data & Research -->
-                <div class="bento-card p-8 relative overflow-hidden group">
-
-                    <div
-                        class="absolute right-0 bottom-0 w-48 h-48 bg-green-50 rounded-full blur-2xl -mr-10 -mb-10 transition group-hover:bg-green-100"
-                    ></div>
-
-                    <div class="relative z-10">
-
-                        <div
-                            class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-400 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg mb-6"
-                        >
-                            <i class="fas fa-magnifying-glass-chart"></i>
-                        </div>
-
-                        <h3 class="text-xl font-bold mb-2">
-                            Data & Research
-                        </h3>
-
-                        <p
-                            class="text-sm text-gray-500 mb-4 leading-relaxed"
-                            data-i18n="hard_data_detail"
-                        >
-                            เปลี่ยนข้อมูลดิบให้เป็นกลยุทธ์ที่จับต้องได้
-                            ด้วยการวิเคราะห์เชิงลึกและการวิจัยตลาด
-                        </p>
-
-                        <div class="space-y-2">
-
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <i class="fas fa-check-circle text-green-500"></i>
-                                <span>Data Analysis</span>
-                            </div>
-
-                            <div class="flex items-center gap-2 text-sm text-gray-600">
-                                <i class="fas fa-check-circle text-green-500"></i>
-                                <span>Market Research</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- AI & Automation -->
-                <div class="bento-card p-8 relative overflow-hidden group">
-
-                    <div
-                        class="absolute left-0 top-0 w-48 h-48 bg-purple-50 rounded-full blur-2xl -ml-10 -mt-10 transition group-hover:bg-purple-100"
-                    ></div>
-
-                    <div class="relative z-10">
-
-                        <div
-                            class="w-14 h-14 bg-gradient-to-br from-purple-600 to-indigo-400 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg mb-6"
-                        >
-                            <i class="fas fa-robot"></i>
-                        </div>
-
-                        <h3 class="text-xl font-bold mb-2">
-                            AI & Automation
-                        </h3>
-
-                        <p
-                            class="text-sm text-gray-500 mb-4 leading-relaxed"
-                            data-i18n="hard_ai_detail"
-                        >
-                            นำเทคโนโลยี AI มาใช้สร้างระบบตอบกลับอัตโนมัติ
-                            ลดภาระงานและเพิ่มความพึงพอใจให้ลูกค้า
-                        </p>
-
-                        <div class="flex flex-wrap gap-2">
-
-                            <span class="tool-pill border-purple-200 bg-purple-50">
-                                <i class="fas fa-bolt text-purple-500"></i>
-                                Quick Reply
-                            </span>
-
-                            <span class="tool-pill border-purple-200 bg-purple-50">
-                                <i class="fas fa-code-branch text-purple-500"></i>
-                                Bot Flows
-                            </span>
-
-                        </div>
-                    </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tool-pill text-xs">Word</span>
+                    <span class="tool-pill text-xs">Excel (Pivot/XLookup)</span>
+                    <span class="tool-pill text-xs">PowerPoint</span>
                 </div>
 
             </div>
 
 
-            <!-- TOOLS -->
-            <h3 class="text-2xl font-bold mb-6 px-2 flex items-center gap-3 reveal">
-                <i class="fas fa-toolbox text-gray-400"></i>
+            <!-- Creative -->
+            <div class="bento-card p-6">
 
-                <span data-i18n="tools_header">
-                    เครื่องมือและซอฟต์แวร์
+                <div class="flex items-center gap-3 mb-4">
+
+                    <div
+                        class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600"
+                    >
+                        <i class="fas fa-palette"></i>
+                    </div>
+
+                    <h4 class="font-bold">
+                        Creative Design
+                    </h4>
+
+                </div>
+
+                <p
+                    class="text-xs text-gray-500 mb-4 min-h-[40px]"
+                    data-i18n="tool_creative_desc"
+                >
+                    สร้างสรรค์สื่อภาพและสื่อการตลาดเพื่อสื่อสารแบรนด์
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="tool-pill text-xs">Illustrator</span>
+                    <span class="tool-pill text-xs">Photoshop</span>
+                    <span class="tool-pill text-xs">Canva</span>
+                    <span class="tool-pill text-xs">AI Art</span>
+                </div>
+
+            </div>
+
+
+            <!-- Video -->
+            <div class="bento-card p-6">
+
+                <div class="flex items-center gap-3 mb-4">
+
+                    <div
+                        class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-pink-600"
+                    >
+                        <i class="fas fa-video"></i>
+                    </div>
+
+                    <h4 class="font-bold">
+                        Video Editing
+                    </h4>
+
+                </div>
+
+                <p
+                    class="text-xs text-gray-500 mb-4 min-h-[40px]"
+                    data-i18n="tool_video_desc"
+                >
+                    ผลิตคอนเทนต์วิดีโอที่น่าสนใจสำหรับโซเชียลมีเดีย
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="tool-pill text-xs">Premiere Pro</span>
+                    <span class="tool-pill text-xs">CapCut</span>
+                </div>
+
+            </div>
+
+
+            <!-- Google -->
+            <div class="bento-card p-6">
+
+                <div class="flex items-center gap-3 mb-4">
+
+                    <div
+                        class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600"
+                    >
+                        <i class="fab fa-google"></i>
+                    </div>
+
+                    <h4 class="font-bold">
+                        Google Tools
+                    </h4>
+
+                </div>
+
+                <p
+                    class="text-xs text-gray-500 mb-4 min-h-[40px]"
+                    data-i18n="tool_google_desc"
+                >
+                    การทำงานร่วมกันบน Cloud และการเขียนสคริปต์อัตโนมัติ
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="tool-pill text-xs">Slide/Sheet/Doc</span>
+                    <span class="tool-pill text-xs">Apps Script</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EXPERIENCE
+========================================================= -->
+
+<section
+    id="experience"
+    class="py-24 px-6 bg-[#fbfbfd]"
+>
+
+    <div class="max-w-4xl mx-auto">
+
+        <h2
+            class="text-4xl font-bold mb-16 text-center"
+            data-i18n="exp_title"
+        >
+            เส้นทางอาชีพ
+        </h2>
+
+
+        <div
+            class="relative border-l-2 border-gray-200 ml-6 md:ml-10 space-y-16"
+        >
+
+
+            <!-- JOB 1 -->
+            <div class="relative pl-10 md:pl-16 reveal">
+
+                <div
+                    class="absolute -left-[9px] top-2 w-4 h-4 bg-black rounded-full border-4 border-white shadow-sm"
+                ></div>
+
+                <span
+                    class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold mb-2"
+                    data-i18n="job1_period"
+                >
+                    พ.ย. 2023 - ปัจจุบัน
                 </span>
-            </h3>
 
+                <h3 class="text-2xl font-bold">
+                    Marketing Specialist
+                </h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                <p class="text-gray-500 font-medium text-lg">
 
-                <!-- Office -->
-                <div class="bento-card p-6">
+                    Glovetex Co.,Ltd (Thailand)
 
-                    <div class="flex items-center gap-3 mb-4">
-
-                        <div
-                            class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600"
-                        >
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-
-                        <h4 class="font-bold">
-                            Microsoft Office
-                        </h4>
-
-                    </div>
-
-                    <p
-                        class="text-xs text-gray-500 mb-4 h-10"
-                        data-i18n="tool_office_desc"
+                    <span
+                        class="text-sm text-gray-400 font-normal"
+                        data-i18n="work_hybrid"
                     >
-                        จัดการเอกสารขั้นสูงและการทำรายงานข้อมูลที่ซับซ้อน
-                    </p>
+                        | Hybrid
+                    </span>
 
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tool-pill text-xs">Word</span>
-                        <span class="tool-pill text-xs">Excel (Pivot/XLookup)</span>
-                        <span class="tool-pill text-xs">PowerPoint</span>
-                    </div>
+                </p>
 
-                </div>
+                <p
+                    class="text-gray-500 text-sm mb-4 italic"
+                    data-i18n="location_samut_sakhon"
+                >
+                    สมุทรสาคร ประเทศไทย
+                </p>
 
+                <ul
+                    class="list-disc ml-5 text-gray-600 space-y-2 leading-relaxed"
+                    data-i18n="job1_desc"
+                >
+                    <li>
+                        <strong>SEO Focus:</strong>
+                        ปรับปรุง Technical SEO และกลยุทธ์คอนเทนต์เพื่อเพิ่มยอดเข้าชม
+                    </li>
 
-                <!-- Creative -->
-                <div class="bento-card p-6">
+                    <li>
+                        <strong>Ads Management:</strong>
+                        บริหารแคมเปญโฆษณาแบบครบวงจร
+                    </li>
 
-                    <div class="flex items-center gap-3 mb-4">
-
-                        <div
-                            class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600"
-                        >
-                            <i class="fas fa-palette"></i>
-                        </div>
-
-                        <h4 class="font-bold">
-                            Creative Design
-                        </h4>
-
-                    </div>
-
-                    <p
-                        class="text-xs text-gray-500 mb-4 h-10"
-                        data-i18n="tool_creative_desc"
-                    >
-                        สร้างสรรค์สื่อภาพและสื่อการตลาดเพื่อสื่อสารแบรนด์
-                    </p>
-
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tool-pill text-xs">Illustrator</span>
-                        <span class="tool-pill text-xs">Photoshop</span>
-                        <span class="tool-pill text-xs">Canva</span>
-                        <span class="tool-pill text-xs">AI Art</span>
-                    </div>
-
-                </div>
-
-
-                <!-- Video -->
-                <div class="bento-card p-6">
-
-                    <div class="flex items-center gap-3 mb-4">
-
-                        <div
-                            class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-pink-600"
-                        >
-                            <i class="fas fa-video"></i>
-                        </div>
-
-                        <h4 class="font-bold">
-                            Video Editing
-                        </h4>
-
-                    </div>
-
-                    <p
-                        class="text-xs text-gray-500 mb-4 h-10"
-                        data-i18n="tool_video_desc"
-                    >
-                        ผลิตคอนเทนต์วิดีโอที่น่าสนใจสำหรับโซเชียลมีเดีย
-                    </p>
-
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tool-pill text-xs">Premiere Pro</span>
-                        <span class="tool-pill text-xs">CapCut</span>
-                    </div>
-
-                </div>
-
-
-                <!-- Google -->
-                <div class="bento-card p-6">
-
-                    <div class="flex items-center gap-3 mb-4">
-
-                        <div
-                            class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600"
-                        >
-                            <i class="fab fa-google"></i>
-                        </div>
-
-                        <h4 class="font-bold">
-                            Google Tools
-                        </h4>
-
-                    </div>
-
-                    <p
-                        class="text-xs text-gray-500 mb-4 h-10"
-                        data-i18n="tool_google_desc"
-                    >
-                        การทำงานร่วมกันบน Cloud และการเขียนสคริปต์อัตโนมัติ
-                    </p>
-
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tool-pill text-xs">Slide/Sheet/Doc</span>
-                        <span class="tool-pill text-xs">Apps Script</span>
-                    </div>
-
-                </div>
+                    <li>
+                        <strong>Automation:</strong>
+                        นำ AI และ Chatbot มาช่วยตอบคำถามลูกค้า
+                    </li>
+                </ul>
 
             </div>
-        </div>
-    </section>
 
 
-    <!-- Experience Timeline -->
-    <section id="experience" class="py-24 px-6 bg-[#fbfbfd]">
-        <div class="max-w-4xl mx-auto">
+            <!-- JOB 2 -->
+            <div class="relative pl-10 md:pl-16 reveal">
 
-            <h2
-                class="text-4xl font-bold mb-16 text-center"
-                data-i18n="exp_title"
-            >
-                เส้นทางอาชีพ
-            </h2>
+                <div
+                    class="absolute -left-[9px] top-2 w-4 h-4 bg-gray-300 rounded-full border-4 border-white shadow-sm"
+                ></div>
 
-            <div class="relative border-l-2 border-gray-200 ml-6 md:ml-10 space-y-16">
+                <span
+                    class="text-sm font-bold text-gray-400 mb-1 block"
+                    data-i18n="job2_period"
+                >
+                    เม.ย. 2021 - ต.ค. 2023
+                </span>
 
-                <!-- Job 1 -->
-                <div class="relative pl-10 md:pl-16 reveal">
+                <h3 class="text-2xl font-bold">
+                    Digital Marketing Specialist
+                </h3>
 
-                    <div
-                        class="absolute -left-[9px] top-2 w-4 h-4 bg-black rounded-full border-4 border-white shadow-sm"
-                    ></div>
+                <p class="text-gray-500 font-medium text-lg">
 
-                    <span
-                        class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold mb-2"
-                        data-i18n="job1_period"
-                    >
-                        พ.ย. 2023 - ปัจจุบัน
-                    </span>
-
-                    <h3 class="text-2xl font-bold">
-                        Marketing Specialist
-                    </h3>
-
-                    <p class="text-gray-500 font-medium text-lg">
-                        Glovetex Co.,Ltd (Thailand)
-
-                        <span
-                            class="text-sm text-gray-400 font-normal"
-                            data-i18n="work_hybrid"
-                        >
-                            | Hybrid
-                        </span>
-                    </p>
-
-                    <p
-                        class="text-gray-500 text-sm mb-4 italic"
-                        data-i18n="location_samut_sakhon"
-                    >
-                        สมุทรสาคร ประเทศไทย
-                    </p>
-
-                    <ul
-                        class="list-disc ml-5 text-gray-600 space-y-2 leading-relaxed"
-                        data-i18n="job1_desc"
-                    >
-                        <li>
-                            <strong>SEO Focus:</strong>
-                            ปรับปรุง Technical SEO และกลยุทธ์คอนเทนต์เพื่อเพิ่มยอดเข้าชม
-                        </li>
-
-                        <li>
-                            <strong>Ads Management:</strong>
-                            บริหารแคมเปญโฆษณาแบบครบวงจร
-                        </li>
-
-                        <li>
-                            <strong>Automation:</strong>
-                            นำ AI และ Chatbot มาช่วยตอบคำถามลูกค้า ลดเวลาการทำงาน
-                        </li>
-                    </ul>
-
-                </div>
-
-
-                <!-- Job 2 -->
-                <div class="relative pl-10 md:pl-16 reveal">
-
-                    <div
-                        class="absolute -left-[9px] top-2 w-4 h-4 bg-gray-300 rounded-full border-4 border-white shadow-sm"
-                    ></div>
+                    PW GEMS
 
                     <span
-                        class="text-sm font-bold text-gray-400 mb-1 block"
-                        data-i18n="job2_period"
+                        class="text-sm text-gray-400 font-normal"
+                        data-i18n="work_fulltime"
                     >
-                        เม.ย. 2021 - ต.ค. 2023
+                        | Full-time
                     </span>
 
-                    <h3 class="text-2xl font-bold">
-                        Digital Marketing Specialist
-                    </h3>
+                </p>
 
-                    <p class="text-gray-500 font-medium text-lg">
-                        PW GEMS
+                <ul
+                    class="list-disc ml-5 text-gray-600 space-y-2 leading-relaxed mt-2"
+                    data-i18n="job2_desc"
+                >
+                    <li>
+                        <strong>Luxury Marketing:</strong>
+                        ดูแลการตลาดดิจิทัลสำหรับสินค้าเครื่องประดับ
+                    </li>
 
-                        <span
-                            class="text-sm text-gray-400 font-normal"
-                            data-i18n="work_fulltime"
-                        >
-                            | Full-time
-                        </span>
-                    </p>
+                    <li>
+                        <strong>Performance Ads:</strong>
+                        ปรับปรุง Facebook & Google Ads
+                    </li>
 
-                    <ul
-                        class="list-disc ml-5 text-gray-600 space-y-2 leading-relaxed mt-2"
-                        data-i18n="job2_desc"
-                    >
-                        <li>
-                            <strong>Luxury Marketing:</strong>
-                            ดูแลการตลาดดิจิทัลสำหรับสินค้าเครื่องประดับ/สินค้าหรูหรา
-                        </li>
-
-                        <li>
-                            <strong>Performance Ads:</strong>
-                            ปรับปรุงโฆษณาออนไลน์เพื่อความคุ้มค่าสูงสุด (High ROAS)
-                        </li>
-
-                        <li>
-                            <strong>Data Analysis:</strong>
-                            วิเคราะห์พฤติกรรมลูกค้าเพื่อเจาะกลุ่มกำลังซื้อสูง
-                        </li>
-                    </ul>
-
-                </div>
-
-
-                <!-- Job 3 -->
-                <div class="relative pl-10 md:pl-16 reveal">
-
-                    <div
-                        class="absolute -left-[9px] top-2 w-4 h-4 bg-gray-300 rounded-full border-4 border-white shadow-sm"
-                    ></div>
-
-                    <span
-                        class="text-sm font-bold text-gray-400 mb-1 block"
-                        data-i18n="job3_period"
-                    >
-                        เม.ย. 2019 - มี.ค. 2021
-                    </span>
-
-                    <h3 class="text-2xl font-bold">
-                        Graphic Designer
-                    </h3>
-
-                    <p class="text-gray-500 font-medium text-lg">
-                        TN Group Corporation Co., Ltd
-
-                        <span
-                            class="text-sm text-gray-400 font-normal"
-                            data-i18n="work_onsite"
-                        >
-                            | On-site
-                        </span>
-                    </p>
-
-                    <ul
-                        class="list-disc ml-5 text-gray-600 space-y-2 leading-relaxed mt-2"
-                        data-i18n="job3_desc"
-                    >
-                        <li>
-                            <strong>Corporate Identity:</strong>
-                            ออกแบบสื่อการตลาดและควบคุมภาพลักษณ์องค์กร
-                        </li>
-
-                        <li>
-                            <strong>Visual Communication:</strong>
-                            แปลงข้อมูลอุตสาหกรรมที่ซับซ้อนให้เป็น Infographic ที่เข้าใจง่าย
-                        </li>
-                    </ul>
-
-                </div>
-
-
-                <!-- Job 4 -->
-                <div class="relative pl-10 md:pl-16 reveal">
-
-                    <div
-                        class="absolute -left-[9px] top-2 w-4 h-4 bg-gray-300 rounded-full border-4 border-white shadow-sm"
-                    ></div>
-
-                    <span
-                        class="text-sm font-bold text-gray-400 mb-1 block"
-                        data-i18n="job4_period"
-                    >
-                        มี.ค. 2017 - มี.ค. 2019
-                    </span>
-
-                    <h3 class="text-2xl font-bold">
-                        IT Manager
-                    </h3>
-
-                    <p class="text-gray-500 font-medium text-lg">
-                        D.S.K. Enterprises Ltd., Part.
-
-                        <span
-                            class="text-sm text-gray-400 font-normal"
-                            data-i18n="work_onsite"
-                        >
-                            | On-site
-                        </span>
-                    </p>
-
-                    <ul
-                        class="list-disc ml-5 text-gray-600 space-y-2 leading-relaxed mt-2"
-                        data-i18n="job4_desc"
-                    >
-                        <li>
-                            <strong>Infrastructure:</strong>
-                            บริหารจัดการระบบ IT พื้นฐาน ซอฟต์แวร์ และฮาร์ดแวร์
-                        </li>
-
-                        <li>
-                            <strong>Problem Solving:</strong>
-                            เป็นรากฐานสำคัญของทักษะการแก้ปัญหาทางเทคนิคในปัจจุบัน
-                        </li>
-                    </ul>
-
-                </div>
+                    <li>
+                        <strong>Data Analysis:</strong>
+                        วิเคราะห์พฤติกรรมลูกค้า
+                    </li>
+                </ul>
 
             </div>
-        </div>
-    </section>
 
 
-    <!-- Education Section -->
-    <section class="py-20 px-6 bg-white border-t border-gray-100">
-        <div class="max-w-7xl mx-auto text-center reveal">
+            <!-- JOB 3 -->
+            <div class="relative pl-10 md:pl-16 reveal">
 
-            <h2
-                class="text-3xl font-bold mb-12"
-                data-i18n="edu_title"
-            >
-                การศึกษา
-            </h2>
-
-
-            <div class="flex flex-wrap justify-center gap-6">
-
-                <!-- Bachelor -->
                 <div
-                    class="bento-card p-8 flex-1 min-w-[300px] border border-gray-100 flex flex-col justify-between"
+                    class="absolute -left-[9px] top-2 w-4 h-4 bg-gray-300 rounded-full border-4 border-white shadow-sm"
+                ></div>
+
+                <span
+                    class="text-sm font-bold text-gray-400 mb-1 block"
+                    data-i18n="job3_period"
                 >
+                    เม.ย. 2019 - มี.ค. 2021
+                </span>
 
-                    <div>
-                        <div class="text-5xl mb-4">
-                            🎓
-                        </div>
+                <h3 class="text-2xl font-bold">
+                    Graphic Designer
+                </h3>
 
-                        <h3
-                            class="text-xl font-bold"
-                            data-i18n="edu_uni_bach"
-                        >
-                            มหาวิทยาลัยธนบุรี
-                        </h3>
+                <p class="text-gray-500 font-medium text-lg">
 
-                        <p
-                            class="text-gray-600 mt-2 font-medium"
-                            data-i18n="edu_degree_bach"
-                        >
-                            ปริญญาตรี สาขาเทคโนโลยีสารสนเทศ (IT)
-                        </p>
-                    </div>
+                    TN Group Corporation Co., Ltd
 
-                    <p
-                        class="text-gray-400 text-sm mt-4 pt-4 border-t"
-                        data-i18n="edu_year_bach"
+                    <span
+                        class="text-sm text-gray-400 font-normal"
+                        data-i18n="work_onsite"
                     >
-                        จบปีการศึกษา: 2554
-                    </p>
+                        | On-site
+                    </span>
 
-                </div>
+                </p>
 
-
-                <!-- High Vocational -->
-                <div
-                    class="bento-card p-8 flex-1 min-w-[300px] border border-gray-100 flex flex-col justify-between"
+                <ul
+                    class="list-disc ml-5 text-gray-600 space-y-2 leading-relaxed mt-2"
+                    data-i18n="job3_desc"
                 >
+                    <li>
+                        <strong>Corporate Identity:</strong>
+                        ออกแบบสื่อการตลาดและควบคุมภาพลักษณ์องค์กร
+                    </li>
 
-                    <div>
-                        <div class="text-5xl mb-4">
-                            📜
-                        </div>
-
-                        <h3
-                            class="text-xl font-bold"
-                            data-i18n="edu_college"
-                        >
-                            วิทยาลัยเทคโนโลยีหมู่บ้านครู
-                        </h3>
-
-                        <p
-                            class="text-gray-600 mt-2 font-medium"
-                            data-i18n="edu_degree_dip"
-                        >
-                            ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)
-                            สาขาคอมพิวเตอร์บริหารธุรกิจ
-                        </p>
-                    </div>
-
-                    <p
-                        class="text-gray-400 text-sm mt-4 pt-4 border-t"
-                        data-i18n="edu_dur_dip"
-                    >
-                        จบปีการศึกษา: 2552
-                    </p>
-
-                </div>
-
-
-                <!-- Vocational Certificate -->
-                <div
-                    class="bento-card p-8 flex-1 min-w-[300px] border border-gray-100 flex flex-col justify-between"
-                >
-
-                    <div>
-                        <div class="text-5xl mb-4">
-                            🏫
-                        </div>
-
-                        <h3
-                            class="text-xl font-bold"
-                            data-i18n="edu_college"
-                        >
-                            วิทยาลัยเทคโนโลยีหมู่บ้านครู
-                        </h3>
-
-                        <p
-                            class="text-gray-600 mt-2 font-medium"
-                            data-i18n="edu_degree_voc"
-                        >
-                            ประกาศนียบัตรวิชาชีพ (ปวช.)
-                            สาขาคอมพิวเตอร์บริหารธุรกิจ
-                        </p>
-                    </div>
-
-                    <p
-                        class="text-gray-400 text-sm mt-4 pt-4 border-t"
-                        data-i18n="edu_dur_voc"
-                    >
-                        จบปีการศึกษา: 2549
-                    </p>
-
-                </div>
+                    <li>
+                        <strong>Visual Communication:</strong>
+                        แปลงข้อมูลอุตสาหกรรมเป็น Infographic
+                    </li>
+                </ul>
 
             </div>
+
+
+            <!-- JOB 4 -->
+            <div class="relative pl-10 md:pl-16 reveal">
+
+                <div
+                    class="absolute -left-[9px] top-2 w-4 h-4 bg-gray-300 rounded-full border-4 border-white shadow-sm"
+                ></div>
+
+                <span
+                    class="text-sm font-bold text-gray-400 mb-1 block"
+                    data-i18n="job4_period"
+                >
+                    มี.ค. 2017 - มี.ค. 2019
+                </span>
+
+                <h3 class="text-2xl font-bold">
+                    IT Manager
+                </h3>
+
+                <p class="text-gray-500 font-medium text-lg">
+
+                    D.S.K. Enterprises Ltd., Part.
+
+                    <span
+                        class="text-sm text-gray-400 font-normal"
+                        data-i18n="work_onsite"
+                    >
+                        | On-site
+                    </span>
+
+                </p>
+
+                <ul
+                    class="list-disc ml-5 text-gray-600 space-y-2 leading-relaxed mt-2"
+                    data-i18n="job4_desc"
+                >
+                    <li>
+                        <strong>Infrastructure:</strong>
+                        บริหาร Hardware, Software และ Network
+                    </li>
+
+                    <li>
+                        <strong>Problem Solving:</strong>
+                        พัฒนาทักษะการแก้ปัญหาทางเทคนิค
+                    </li>
+                </ul>
+
+            </div>
+
         </div>
-    </section>
+
+    </div>
+
+</section>
 
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 px-6 bg-black text-white">
+<!-- =========================================================
+     EDUCATION
+========================================================= -->
 
-        <div class="max-w-5xl mx-auto text-center reveal">
+<section class="py-20 px-6 bg-white border-t border-gray-100">
 
-            <h2
-                class="text-5xl md:text-7xl font-bold mb-6"
-                data-i18n="contact_header"
+    <div class="max-w-7xl mx-auto text-center reveal">
+
+        <h2
+            class="text-3xl font-bold mb-12"
+            data-i18n="edu_title"
+        >
+            การศึกษา
+        </h2>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+
+            <!-- Bachelor -->
+            <div
+                class="bento-card p-8 border border-gray-100 flex flex-col justify-between"
             >
-                ร่วมงานกับผม
-            </h2>
+
+                <div>
+
+                    <div class="text-5xl mb-4">
+                        🎓
+                    </div>
+
+                    <h3
+                        class="text-xl font-bold"
+                        data-i18n="edu_uni_bach"
+                    >
+                        มหาวิทยาลัยธนบุรี
+                    </h3>
+
+                    <p
+                        class="text-gray-600 mt-2 font-medium"
+                        data-i18n="edu_degree_bach"
+                    >
+                        ปริญญาตรี สาขาเทคโนโลยีสารสนเทศ (IT)
+                    </p>
+
+                </div>
+
+                <p
+                    class="text-gray-400 text-sm mt-6 pt-4 border-t"
+                    data-i18n="edu_year_bach"
+                >
+                    จบปีการศึกษา: 2554
+                </p>
+
+            </div>
+
+
+            <!-- Diploma -->
+            <div
+                class="bento-card p-8 border border-gray-100 flex flex-col justify-between"
+            >
+
+                <div>
+
+                    <div class="text-5xl mb-4">
+                        📜
+                    </div>
+
+                    <h3
+                        class="text-xl font-bold"
+                        data-i18n="edu_college"
+                    >
+                        วิทยาลัยเทคโนโลยีหมู่บ้านครู
+                    </h3>
+
+                    <p
+                        class="text-gray-600 mt-2 font-medium"
+                        data-i18n="edu_degree_dip"
+                    >
+                        ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)
+                        สาขาคอมพิวเตอร์บริหารธุรกิจ
+                    </p>
+
+                </div>
+
+                <p
+                    class="text-gray-400 text-sm mt-6 pt-4 border-t"
+                    data-i18n="edu_dur_dip"
+                >
+                    จบปีการศึกษา: 2552
+                </p>
+
+            </div>
+
+
+            <!-- Vocational -->
+            <div
+                class="bento-card p-8 border border-gray-100 flex flex-col justify-between"
+            >
+
+                <div>
+
+                    <div class="text-5xl mb-4">
+                        🏫
+                    </div>
+
+                    <h3
+                        class="text-xl font-bold"
+                        data-i18n="edu_college"
+                    >
+                        วิทยาลัยเทคโนโลยีหมู่บ้านครู
+                    </h3>
+
+                    <p
+                        class="text-gray-600 mt-2 font-medium"
+                        data-i18n="edu_degree_voc"
+                    >
+                        ประกาศนียบัตรวิชาชีพ (ปวช.)
+                        สาขาคอมพิวเตอร์บริหารธุรกิจ
+                    </p>
+
+                </div>
+
+                <p
+                    class="text-gray-400 text-sm mt-6 pt-4 border-t"
+                    data-i18n="edu_dur_voc"
+                >
+                    จบปีการศึกษา: 2549
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section
+    id="contact"
+    class="py-24 px-6 bg-black text-white"
+>
+
+    <div class="max-w-5xl mx-auto text-center reveal">
+
+        <h2
+            class="text-5xl md:text-7xl font-bold mb-6"
+            data-i18n="contact_header"
+        >
+            ร่วมงานกับผม
+        </h2>
+
+        <p
+            class="text-gray-400 text-xl mb-12 max-w-3xl mx-auto leading-relaxed"
+            data-i18n="contact_desc"
+        >
+            หากคุณกำลังมองหานักการตลาดที่สามารถเชื่อมโยง
+            Marketing, Creative, Data และ Technology เข้าด้วยกัน
+            ผมอาจเป็นคำตอบที่คุณกำลังมองหา
+        </p>
+
+
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16"
+        >
+
+            <!-- Email -->
+            <a
+                href="mailto:tk.khompae@gmail.com"
+                class="p-6 rounded-2xl bg-gray-900 hover:bg-gray-800 transition border border-gray-800 group"
+            >
+
+                <i
+                    class="fas fa-envelope text-3xl mb-4 text-gray-400 group-hover:text-white"
+                ></i>
+
+                <h4 class="font-bold">
+                    Email
+                </h4>
+
+                <p class="text-xs text-gray-500 break-words">
+                    tk.khompae@gmail.com
+                </p>
+
+            </a>
+
+
+            <!-- Line -->
+            <a
+                href="https://line.me/ti/p/~toffylifes"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-6 rounded-2xl bg-gray-900 hover:bg-gray-800 transition border border-gray-800 group"
+            >
+
+                <i class="fab fa-line text-3xl mb-4 icon-line"></i>
+
+                <h4 class="font-bold">
+                    Line
+                </h4>
+
+                <p class="text-xs text-gray-500">
+                    ID: toffylifes
+                </p>
+
+            </a>
+
+
+            <!-- Messenger -->
+            <a
+                href="https://m.me/tk.khom"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-6 rounded-2xl bg-gray-900 hover:bg-gray-800 transition border border-gray-800 group"
+            >
+
+                <i
+                    class="fab fa-facebook-messenger text-3xl mb-4 icon-fb"
+                ></i>
+
+                <h4 class="font-bold">
+                    Messenger
+                </h4>
+
+                <p class="text-xs text-gray-500">
+                    @TK.KHOM
+                </p>
+
+            </a>
+
+
+            <!-- WhatsApp -->
+            <a
+                href="https://wa.me/66894268386"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-6 rounded-2xl bg-gray-900 hover:bg-gray-800 transition border border-gray-800 group"
+            >
+
+                <i
+                    class="fab fa-whatsapp text-3xl mb-4 icon-wa"
+                ></i>
+
+                <h4 class="font-bold">
+                    WhatsApp / Tel
+                </h4>
+
+                <p class="text-xs text-gray-500">
+                    089 426 8386
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <div class="text-gray-500 text-sm">
 
             <p
-                class="text-gray-400 text-xl mb-12"
-                data-i18n="contact_desc"
+                class="mb-2"
+                data-i18n="based_in"
             >
-                หากคุณกำลังมองหานักการตลาดที่สามารถเชื่อมโยง
-                Marketing, Creative, Data และ Technology เข้าด้วยกัน
-                ผมอาจเป็นคำตอบที่คุณกำลังมองหา
+                ประจำอยู่ที่จังหวัดสมุทรสาคร ประเทศไทย
             </p>
 
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-
-                <!-- Email -->
-                <a
-                    href="mailto:tk.khompae@gmail.com"
-                    class="p-6 rounded-2xl bg-gray-900 hover:bg-gray-800 transition border border-gray-800 group"
-                >
-                    <i
-                        class="fas fa-envelope text-3xl mb-4 text-gray-400 group-hover:text-white"
-                    ></i>
-
-                    <h4 class="font-bold">
-                        Email
-                    </h4>
-
-                    <p class="text-xs text-gray-500 break-words">
-                        tk.khompae@gmail.com
-                    </p>
-                </a>
-
-
-                <!-- Line -->
-                <a
-                    href="https://line.me/ti/p/~toffylifes"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="p-6 rounded-2xl bg-gray-900 hover:bg-gray-800 transition border border-gray-800 group"
-                >
-                    <i class="fab fa-line text-3xl mb-4 icon-line"></i>
-
-                    <h4 class="font-bold">
-                        Line
-                    </h4>
-
-                    <p class="text-xs text-gray-500">
-                        ID: toffylifes
-                    </p>
-                </a>
-
-
-                <!-- Messenger -->
-                <a
-                    href="https://m.me/tk.khom"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="p-6 rounded-2xl bg-gray-900 hover:bg-gray-800 transition border border-gray-800 group"
-                >
-                    <i class="fab fa-facebook-messenger text-3xl mb-4 icon-fb"></i>
-
-                    <h4 class="font-bold">
-                        Messenger
-                    </h4>
-
-                    <p class="text-xs text-gray-500">
-                        @TK.KHOM
-                    </p>
-                </a>
-
-
-                <!-- WhatsApp / Phone -->
-                <a
-                    href="https://wa.me/66894268386"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="p-6 rounded-2xl bg-gray-900 hover:bg-gray-800 transition border border-gray-800 group"
-                >
-                    <i class="fab fa-whatsapp text-3xl mb-4 icon-wa"></i>
-
-                    <h4 class="font-bold">
-                        WhatsApp / Tel
-                    </h4>
-
-                    <p class="text-xs text-gray-500">
-                        089 426 8386
-                    </p>
-                </a>
-
-            </div>
-
-
-            <div class="text-gray-500 text-sm">
-
-                <p
-                    class="mb-2"
-                    data-i18n="based_in"
-                >
-                    ประจำอยู่ที่จังหวัดสมุทรสาคร ประเทศไทย
-                </p>
-
-                <p>
-                    &copy; 2026 Teerasak Khompae.
-                </p>
-
-            </div>
+            <p>
+                &copy; 2026 Teerasak Khompae.
+            </p>
 
         </div>
-    </section>
+
+    </div>
+
+</section>
 
 
-    <!-- Language Logic -->
-    <script>
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
-        /*
-        |--------------------------------------------------------------------------
-        | Translation Dictionary
-        |--------------------------------------------------------------------------
-        */
+<script>
 
-        const i18n = {
+    const i18n = {
 
-            th: {
+        th: {
 
-                /* Navigation */
-                nav_aboutus: "เกี่ยวกับฉัน",
-                nav_skills: "ทักษะ",
-                nav_exp: "ประสบการณ์",
+            nav_aboutus: "เกี่ยวกับฉัน",
+            nav_skills: "ทักษะ",
+            nav_exp: "ประสบการณ์",
 
+            hero_role: "นักกลยุทธ์การตลาด",
 
-                /* Hero */
-                hero_role: "นักกลยุทธ์การตลาด",
+            interested_tag:
+                "ตำแหน่งที่สนใจ: Marketing Manager • Digital Marketing Lead",
 
-                interested_tag:
-                    "ตำแหน่งที่สนใจ: Marketing Manager • Digital Marketing Lead",
+            hero_desc:
+                "ผสานความคิดสร้างสรรค์ทางการตลาด เข้ากับเทคโนโลยี IT เพื่อผลลัพธ์ที่เหนือกว่า ด้วยกลยุทธ์ที่ขับเคลื่อนด้วยข้อมูล",
 
-                hero_desc:
-                    "ผสานความคิดสร้างสรรค์ทางการตลาด เข้ากับเทคโนโลยี IT เพื่อผลลัพธ์ที่เหนือกว่า ด้วยกลยุทธ์ที่ขับเคลื่อนด้วยข้อมูล",
+            btn_contact: "ติดต่อร่วมงาน",
 
-                btn_contact: "ติดต่อร่วมงาน",
+            experience_label: "ประสบการณ์",
+            experience_years: "9+ ปี",
 
-                experience_label: "ประสบการณ์",
-                experience_years: "9+ ปี",
+            skills_title: "ทักษะและความเชี่ยวชาญ",
 
+            skills_subtitle:
+                "แสดงภาพรวมความสามารถหลักและเครื่องมือที่เชี่ยวชาญ",
 
-                /* Skills */
-                skills_title: "ทักษะและความเชี่ยวชาญ",
+            primary_skill: "ทักษะหลัก",
 
-                skills_subtitle:
-                    "แสดงภาพรวมความสามารถหลักและเครื่องมือที่เชี่ยวชาญ",
+            hard_seo_detail:
+                "เชี่ยวชาญด้านการวางแผน Keyword และการทำ Technical SEO เพื่อเพิ่มยอดผู้เข้าชมแบบ Organic รวมถึงการบริหารโฆษณา (SEM) ให้คุ้มค่าที่สุด",
 
-                primary_skill: "ทักษะหลัก",
+            hard_data_detail:
+                "เปลี่ยนข้อมูลดิบให้เป็นกลยุทธ์ที่จับต้องได้ ด้วยการวิเคราะห์เชิงลึกและการวิจัยตลาด",
 
-                hard_seo_detail:
-                    "เชี่ยวชาญด้านการวางแผน Keyword และการทำ Technical SEO เพื่อเพิ่มยอดผู้เข้าชมแบบ Organic รวมถึงการบริหารโฆษณา (SEM) ให้คุ้มค่าที่สุด",
+            hard_ai_detail:
+                "นำเทคโนโลยี AI มาใช้สร้างระบบตอบกลับอัตโนมัติ ลดภาระงานและเพิ่มความพึงพอใจให้ลูกค้า",
 
-                hard_data_detail:
-                    "เปลี่ยนข้อมูลดิบให้เป็นกลยุทธ์ที่จับต้องได้ ด้วยการวิเคราะห์เชิงลึกและการวิจัยตลาด",
+            tools_header: "เครื่องมือและซอฟต์แวร์",
 
-                hard_ai_detail:
-                    "นำเทคโนโลยี AI มาใช้สร้างระบบตอบกลับอัตโนมัติ ลดภาระงานและเพิ่มความพึงพอใจให้ลูกค้า",
+            tool_office_desc:
+                "จัดการเอกสารขั้นสูงและการทำรายงานข้อมูลที่ซับซ้อน",
 
+            tool_creative_desc:
+                "สร้างสรรค์สื่อภาพและสื่อการตลาดเพื่อสื่อสารแบรนด์",
 
-                /* Tools */
-                tools_header: "เครื่องมือและซอฟต์แวร์",
+            tool_video_desc:
+                "ผลิตคอนเทนต์วิดีโอที่น่าสนใจสำหรับโซเชียลมีเดีย",
 
-                tool_office_desc:
-                    "จัดการเอกสารขั้นสูงและการทำรายงานข้อมูลที่ซับซ้อน",
+            tool_google_desc:
+                "การทำงานร่วมกันบน Cloud และการเขียนสคริปต์อัตโนมัติ",
 
-                tool_creative_desc:
-                    "สร้างสรรค์สื่อภาพและสื่อการตลาดเพื่อสื่อสารแบรนด์",
+            exp_title: "เส้นทางอาชีพ",
 
-                tool_video_desc:
-                    "ผลิตคอนเทนต์วิดีโอที่น่าสนใจสำหรับโซเชียลมีเดีย",
+            job1_period: "พ.ย. 2023 - ปัจจุบัน",
+            job2_period: "เม.ย. 2021 - ต.ค. 2023",
+            job3_period: "เม.ย. 2019 - มี.ค. 2021",
+            job4_period: "มี.ค. 2017 - มี.ค. 2019",
 
-                tool_google_desc:
-                    "การทำงานร่วมกันบน Cloud และการเขียนสคริปต์อัตโนมัติ",
+            work_hybrid: "| Hybrid",
+            work_fulltime: "| Full-time",
+            work_onsite: "| On-site",
 
+            location_samut_sakhon:
+                "สมุทรสาคร ประเทศไทย",
 
-                /* Experience */
-                exp_title: "เส้นทางอาชีพ",
+            job1_desc:
+                "<li><strong>SEO Focus:</strong> ปรับปรุง Technical SEO และกลยุทธ์คอนเทนต์เพื่อเพิ่มยอดเข้าชมแบบ Organic</li>" +
+                "<li><strong>Ads Management:</strong> บริหารแคมเปญโฆษณาแบบ Full Funnel เพื่อสร้างผลลัพธ์ทางธุรกิจ</li>" +
+                "<li><strong>Automation:</strong> นำ AI และ Chatbot มาใช้เพื่อลดระยะเวลาตอบกลับและเพิ่มความพึงพอใจของลูกค้า</li>",
 
-                job1_period: "พ.ย. 2023 - ปัจจุบัน",
-                job2_period: "เม.ย. 2021 - ต.ค. 2023",
-                job3_period: "เม.ย. 2019 - มี.ค. 2021",
-                job4_period: "มี.ค. 2017 - มี.ค. 2019",
+            job2_desc:
+                "<li><strong>Luxury Marketing:</strong> ดูแลการตลาดดิจิทัลสำหรับสินค้าเครื่องประดับและสินค้าระดับพรีเมียม</li>" +
+                "<li><strong>Performance Ads:</strong> ปรับปรุง Facebook Ads และ Google Ads เพื่อเพิ่มประสิทธิภาพและ ROAS</li>" +
+                "<li><strong>Data Analysis:</strong> วิเคราะห์พฤติกรรมลูกค้าเพื่อเข้าถึงกลุ่มลูกค้าที่มีกำลังซื้อสูง</li>",
 
-                work_hybrid: "| Hybrid",
-                work_fulltime: "| Full-time",
-                work_onsite: "| On-site",
+            job3_desc:
+                "<li><strong>Corporate Identity:</strong> ออกแบบสื่อการตลาดและควบคุมภาพลักษณ์องค์กรให้สอดคล้องกับแบรนด์</li>" +
+                "<li><strong>Visual Communication:</strong> แปลงข้อมูลอุตสาหกรรมที่ซับซ้อนให้เป็น Infographic ที่เข้าใจง่าย</li>",
 
-                location_samut_sakhon:
-                    "สมุทรสาคร ประเทศไทย",
+            job4_desc:
+                "<li><strong>Infrastructure:</strong> บริหารจัดการ Hardware, Software และระบบ Network</li>" +
+                "<li><strong>Problem Solving:</strong> พัฒนาทักษะการแก้ไขปัญหาทางเทคนิค ซึ่งเป็นพื้นฐานสำคัญในการทำงานด้าน MarTech ในปัจจุบัน</li>",
 
-                job1_desc:
-                    "<li><strong>SEO Focus:</strong> ปรับปรุง Technical SEO และกลยุทธ์คอนเทนต์เพื่อเพิ่มยอดเข้าชมแบบ Organic</li>" +
-                    "<li><strong>Ads Management:</strong> บริหารแคมเปญโฆษณาแบบ Full Funnel เพื่อสร้างผลลัพธ์ทางธุรกิจ</li>" +
-                    "<li><strong>Automation:</strong> นำ AI และ Chatbot มาใช้เพื่อลดระยะเวลาตอบกลับและเพิ่มความพึงพอใจของลูกค้า</li>",
+            edu_title: "การศึกษา",
 
-                job2_desc:
-                    "<li><strong>Luxury Marketing:</strong> ดูแลการตลาดดิจิทัลสำหรับสินค้าเครื่องประดับและสินค้าระดับพรีเมียม</li>" +
-                    "<li><strong>Performance Ads:</strong> ปรับปรุง Facebook Ads และ Google Ads เพื่อเพิ่มประสิทธิภาพและ ROAS</li>" +
-                    "<li><strong>Data Analysis:</strong> วิเคราะห์พฤติกรรมลูกค้าเพื่อเข้าถึงกลุ่มลูกค้าที่มีกำลังซื้อสูง</li>",
+            edu_uni_bach:
+                "มหาวิทยาลัยธนบุรี",
 
-                job3_desc:
-                    "<li><strong>Corporate Identity:</strong> ออกแบบสื่อการตลาดและควบคุมภาพลักษณ์องค์กรให้สอดคล้องกับแบรนด์</li>" +
-                    "<li><strong>Visual Communication:</strong> แปลงข้อมูลอุตสาหกรรมที่ซับซ้อนให้เป็น Infographic ที่เข้าใจง่าย</li>",
+            edu_degree_bach:
+                "ปริญญาตรี สาขาเทคโนโลยีสารสนเทศ (IT)",
 
-                job4_desc:
-                    "<li><strong>Infrastructure:</strong> บริหารจัดการ Hardware, Software และระบบ Network</li>" +
-                    "<li><strong>Problem Solving:</strong> พัฒนาทักษะการแก้ไขปัญหาทางเทคนิค ซึ่งเป็นพื้นฐานสำคัญในการทำงานด้าน MarTech ในปัจจุบัน</li>",
+            edu_year_bach:
+                "จบปีการศึกษา: 2554",
 
+            edu_college:
+                "วิทยาลัยเทคโนโลยีหมู่บ้านครู",
 
-                /* Education */
-                edu_title: "การศึกษา",
+            edu_degree_dip:
+                "ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.) สาขาคอมพิวเตอร์บริหารธุรกิจ",
 
-                edu_uni_bach:
-                    "มหาวิทยาลัยธนบุรี",
+            edu_dur_dip:
+                "จบปีการศึกษา: 2552",
 
-                edu_degree_bach:
-                    "ปริญญาตรี สาขาเทคโนโลยีสารสนเทศ (IT)",
+            edu_degree_voc:
+                "ประกาศนียบัตรวิชาชีพ (ปวช.) สาขาคอมพิวเตอร์บริหารธุรกิจ",
 
-                edu_year_bach:
-                    "จบปีการศึกษา: 2554",
+            edu_dur_voc:
+                "จบปีการศึกษา: 2549",
 
-                edu_college:
-                    "วิทยาลัยเทคโนโลยีหมู่บ้านครู",
+            contact_header:
+                "ร่วมงานกับผม",
 
-                edu_degree_dip:
-                    "ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.) สาขาคอมพิวเตอร์บริหารธุรกิจ",
+            contact_desc:
+                "หากคุณกำลังมองหานักการตลาดที่สามารถเชื่อมโยง Marketing, Creative, Data และ Technology เข้าด้วยกัน ผมอาจเป็นคำตอบที่คุณกำลังมองหา",
 
-                edu_dur_dip:
-                    "จบปีการศึกษา: 2552",
-
-                edu_degree_voc:
-                    "ประกาศนียบัตรวิชาชีพ (ปวช.) สาขาคอมพิวเตอร์บริหารธุรกิจ",
-
-                edu_dur_voc:
-                    "จบปีการศึกษา: 2549",
+            based_in:
+                "ประจำอยู่ที่จังหวัดสมุทรสาคร ประเทศไทย"
+        },
 
 
-                /* Contact */
-                contact_header:
-                    "ร่วมงานกับผม",
+        en: {
 
-                contact_desc:
-                    "หากคุณกำลังมองหานักการตลาดที่สามารถเชื่อมโยง Marketing, Creative, Data และ Technology เข้าด้วยกัน ผมอาจเป็นคำตอบที่คุณกำลังมองหา",
+            nav_aboutus: "About",
+            nav_skills: "Skills",
+            nav_exp: "Experience",
 
-                based_in:
-                    "ประจำอยู่ที่จังหวัดสมุทรสาคร ประเทศไทย"
+            hero_role:
+                "Marketing Strategist",
+
+            interested_tag:
+                "Looking for: Marketing Manager • Digital Marketing Lead",
+
+            hero_desc:
+                "Bridging the gap between Creative Marketing & IT Technology. Data-driven strategies with a creative touch.",
+
+            btn_contact:
+                "Contact Me",
+
+            experience_label:
+                "Experience",
+
+            experience_years:
+                "9+ Years",
+
+            skills_title:
+                "Technical Proficiency",
+
+            skills_subtitle:
+                "Visualizing My Core Competencies & Toolkit",
+
+            primary_skill:
+                "Primary Skill",
+
+            hard_seo_detail:
+                "Mastering the art of organic visibility and paid performance. Leveraging keyword research and technical SEO to dominate search results.",
+
+            hard_data_detail:
+                "Transforming raw data into actionable insights using advanced analysis techniques.",
+
+            hard_ai_detail:
+                "Integrating AI to streamline workflows and enhance customer engagement.",
+
+            tools_header:
+                "Essential Tools & Software",
+
+            tool_office_desc:
+                "Advanced documentation and complex data handling.",
+
+            tool_creative_desc:
+                "Crafting visual assets and marketing materials.",
+
+            tool_video_desc:
+                "Producing engaging video content for social media.",
+
+            tool_google_desc:
+                "Cloud collaboration and automation scripting.",
+
+            exp_title:
+                "Professional Journey",
+
+            job1_period:
+                "Nov 2023 - Present",
+
+            job2_period:
+                "Apr 2021 - Oct 2023",
+
+            job3_period:
+                "Apr 2019 - Mar 2021",
+
+            job4_period:
+                "Mar 2017 - Mar 2019",
+
+            work_hybrid:
+                "| Hybrid",
+
+            work_fulltime:
+                "| Full-time",
+
+            work_onsite:
+                "| On-site",
+
+            location_samut_sakhon:
+                "Samut Sakhon, Thailand",
+
+            job1_desc:
+                "<li><strong>SEO Focus:</strong> Implemented Technical SEO & Content Strategy to increase organic visibility.</li>" +
+                "<li><strong>Ads Management:</strong> Managed full-funnel advertising campaigns to drive business performance.</li>" +
+                "<li><strong>Automation:</strong> Deployed AI Chatbots to reduce response time and improve customer satisfaction.</li>",
+
+            job2_desc:
+                "<li><strong>Luxury Marketing:</strong> Managed digital presence for high-value jewelry products.</li>" +
+                "<li><strong>Performance Ads:</strong> Optimized Facebook & Google Ads for maximum ROAS.</li>" +
+                "<li><strong>Data Analysis:</strong> Analyzed customer behavior to target high-spending segments.</li>",
+
+            job3_desc:
+                "<li><strong>Corporate Identity:</strong> Designed marketing materials ensuring brand consistency.</li>" +
+                "<li><strong>Visual Communication:</strong> Translated complex industrial data into easy-to-understand infographics.</li>",
+
+            job4_desc:
+                "<li><strong>Infrastructure:</strong> Managed Hardware, Software, and Network systems.</li>" +
+                "<li><strong>Problem Solving:</strong> Developed strong troubleshooting skills now applied to MarTech challenges.</li>",
+
+            edu_title:
+                "Education",
+
+            edu_uni_bach:
+                "Thonburi University",
+
+            edu_degree_bach:
+                "Bachelor of Science in Information Technology (IT)",
+
+            edu_year_bach:
+                "Graduated: 2011 (2554)",
+
+            edu_college:
+                "Muban Kru Technology College",
+
+            edu_degree_dip:
+                "Diploma (High Voc.) in Computer & Business Administration",
+
+            edu_dur_dip:
+                "Graduated: 2009 (2552)",
+
+            edu_degree_voc:
+                "Vocational Certificate in Computer & Business Administration",
+
+            edu_dur_voc:
+                "Graduated: 2006 (2549)",
+
+            contact_header:
+                "Let's Connect.",
+
+            contact_desc:
+                "If you're looking for a marketer who can connect Marketing, Creative, Data and Technology, I might be the person you're looking for.",
+
+            based_in:
+                "Based in Samut Sakhon, Thailand"
+        }
+
+    };
+
+
+    /* ========================================================
+       LANGUAGE
+    ======================================================== */
+
+    const toggle =
+        document.getElementById('lang-toggle');
+
+    const labelTH =
+        document.getElementById('label-th');
+
+    const labelEN =
+        document.getElementById('label-en');
+
+
+    function updateLanguage(lang, animate = true) {
+
+        if (!i18n[lang]) {
+            console.error(
+                `Language "${lang}" is not available.`
+            );
+            return;
+        }
+
+
+        document.documentElement.lang = lang;
+
+
+        const elements =
+            document.querySelectorAll('[data-i18n]');
+
+
+        elements.forEach((el) => {
+
+            const key =
+                el.getAttribute('data-i18n');
+
+
+            if (
+                Object.prototype.hasOwnProperty.call(
+                    i18n[lang],
+                    key
+                )
+            ) {
+
+                const changeText = () => {
+
+                    el.innerHTML =
+                        i18n[lang][key];
+
+                    el.style.opacity = '1';
+
+                };
+
+
+                if (animate) {
+
+                    el.style.opacity = '0';
+
+                    setTimeout(
+                        changeText,
+                        120
+                    );
+
+                } else {
+
+                    changeText();
+
+                }
+
+            } else {
+
+                console.warn(
+                    `[i18n] Missing "${key}" in "${lang}".`
+                );
+
+            }
+
+        });
+
+
+        toggle.checked =
+            lang === 'en';
+
+
+        if (lang === 'th') {
+
+            labelTH.classList.add('lang-active');
+            labelTH.classList.remove('lang-inactive');
+
+            labelEN.classList.add('lang-inactive');
+            labelEN.classList.remove('lang-active');
+
+        } else {
+
+            labelEN.classList.add('lang-active');
+            labelEN.classList.remove('lang-inactive');
+
+            labelTH.classList.add('lang-inactive');
+            labelTH.classList.remove('lang-active');
+
+        }
+
+
+        try {
+
+            localStorage.setItem(
+                'portfolioLanguage',
+                lang
+            );
+
+        } catch (error) {
+
+            console.warn(
+                'Unable to save language preference.',
+                error
+            );
+
+        }
+
+    }
+
+
+    toggle.addEventListener(
+        'change',
+        function () {
+
+            updateLanguage(
+                this.checked
+                    ? 'en'
+                    : 'th'
+            );
+
+        }
+    );
+
+
+    /* ========================================================
+       SAVED LANGUAGE
+    ======================================================== */
+
+    let initialLanguage = 'th';
+
+    try {
+
+        const savedLanguage =
+            localStorage.getItem(
+                'portfolioLanguage'
+            );
+
+        if (
+            savedLanguage === 'th' ||
+            savedLanguage === 'en'
+        ) {
+
+            initialLanguage =
+                savedLanguage;
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            'Unable to read language preference.',
+            error
+        );
+
+    }
+
+
+    updateLanguage(
+        initialLanguage,
+        false
+    );
+
+
+    /* ========================================================
+       REVEAL
+    ======================================================== */
+
+    const observer =
+        new IntersectionObserver(
+
+            (entries) => {
+
+                entries.forEach(
+                    (entry) => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target
+                                .classList
+                                .add('active');
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
             },
 
-
-            en: {
-
-                /* Navigation */
-                nav_aboutus: "About",
-                nav_skills: "Skills",
-                nav_exp: "Experience",
-
-
-                /* Hero */
-                hero_role:
-                    "Marketing Strategist",
-
-                interested_tag:
-                    "Looking for: Marketing Manager • Digital Marketing Lead",
-
-                hero_desc:
-                    "Bridging the gap between Creative Marketing & IT Technology. Data-driven strategies with a creative touch.",
-
-                btn_contact:
-                    "Contact Me",
-
-                experience_label:
-                    "Experience",
-
-                experience_years:
-                    "9+ Years",
-
-
-                /* Skills */
-                skills_title:
-                    "Technical Proficiency",
-
-                skills_subtitle:
-                    "Visualizing My Core Competencies & Toolkit",
-
-                primary_skill:
-                    "Primary Skill",
-
-                hard_seo_detail:
-                    "Mastering the art of organic visibility and paid performance. Leveraging keyword research and technical SEO to dominate search results.",
-
-                hard_data_detail:
-                    "Transforming raw data into actionable insights using advanced analysis techniques.",
-
-                hard_ai_detail:
-                    "Integrating AI to streamline workflows and enhance customer engagement.",
-
-
-                /* Tools */
-                tools_header:
-                    "Essential Tools & Software",
-
-                tool_office_desc:
-                    "Advanced documentation and complex data handling.",
-
-                tool_creative_desc:
-                    "Crafting visual assets and marketing materials.",
-
-                tool_video_desc:
-                    "Producing engaging video content for social media.",
-
-                tool_google_desc:
-                    "Cloud collaboration and automation scripting.",
-
-
-                /* Experience */
-                exp_title:
-                    "Professional Journey",
-
-                job1_period:
-                    "Nov 2023 - Present",
-
-                job2_period:
-                    "Apr 2021 - Oct 2023",
-
-                job3_period:
-                    "Apr 2019 - Mar 2021",
-
-                job4_period:
-                    "Mar 2017 - Mar 2019",
-
-                work_hybrid:
-                    "| Hybrid",
-
-                work_fulltime:
-                    "| Full-time",
-
-                work_onsite:
-                    "| On-site",
-
-                location_samut_sakhon:
-                    "Samut Sakhon, Thailand",
-
-                job1_desc:
-                    "<li><strong>SEO Focus:</strong> Implemented Technical SEO & Content Strategy to increase organic visibility.</li>" +
-                    "<li><strong>Ads Management:</strong> Managed full-funnel advertising campaigns to drive business performance.</li>" +
-                    "<li><strong>Automation:</strong> Deployed AI Chatbots to reduce response time and improve customer satisfaction.</li>",
-
-                job2_desc:
-                    "<li><strong>Luxury Marketing:</strong> Managed digital presence for high-value jewelry products.</li>" +
-                    "<li><strong>Performance Ads:</strong> Optimized Facebook & Google Ads for maximum ROAS.</li>" +
-                    "<li><strong>Data Analysis:</strong> Analyzed customer behavior to target high-spending segments.</li>",
-
-                job3_desc:
-                    "<li><strong>Corporate Identity:</strong> Designed marketing materials ensuring brand consistency.</li>" +
-                    "<li><strong>Visual Communication:</strong> Translated complex industrial data into easy-to-understand infographics.</li>",
-
-                job4_desc:
-                    "<li><strong>Infrastructure:</strong> Managed Hardware, Software, and Network systems.</li>" +
-                    "<li><strong>Problem Solving:</strong> Developed strong troubleshooting skills now applied to MarTech challenges.</li>",
-
-
-                /* Education */
-                edu_title:
-                    "Education",
-
-                edu_uni_bach:
-                    "Thonburi University",
-
-                edu_degree_bach:
-                    "Bachelor of Science in Information Technology (IT)",
-
-                edu_year_bach:
-                    "Graduated: 2011 (2554)",
-
-                edu_college:
-                    "Muban Kru Technology College",
-
-                edu_degree_dip:
-                    "Diploma (High Voc.) in Computer & Business Administration",
-
-                edu_dur_dip:
-                    "Graduated: 2009 (2552)",
-
-                edu_degree_voc:
-                    "Vocational Certificate in Computer & Business Administration",
-
-                edu_dur_voc:
-                    "Graduated: 2006 (2549)",
-
-
-                /* Contact */
-                contact_header:
-                    "Let's Connect.",
-
-                contact_desc:
-                    "If you're looking for a marketer who can connect Marketing, Creative, Data and Technology, I might be the person you're looking for.",
-
-                based_in:
-                    "Based in Samut Sakhon, Thailand"
+            {
+                threshold: 0.1
             }
 
-        };
+        );
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | DOM Elements
-        |--------------------------------------------------------------------------
-        */
-
-        const toggle = document.getElementById('lang-toggle');
-
-        const labelTH = document.getElementById('label-th');
-
-        const labelEN = document.getElementById('label-en');
+    document
+        .querySelectorAll('.reveal')
+        .forEach(
+            (el) =>
+                observer.observe(el)
+        );
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | Update Language
-        |--------------------------------------------------------------------------
-        */
+    /* ========================================================
+       I18N VALIDATION
+    ======================================================== */
 
-        function updateLanguage(lang, animate = true) {
+    function validateTranslations() {
 
-            /*
-             * Prevent invalid language values.
-             */
-            if (!i18n[lang]) {
-                console.error(`Language "${lang}" is not available.`);
-                return;
-            }
-
-
-            /*
-             * Update <html lang="">
-             */
-            document.documentElement.lang = lang;
+        const usedKeys =
+            new Set(
+                Array.from(
+                    document.querySelectorAll(
+                        '[data-i18n]'
+                    )
+                ).map(
+                    (el) =>
+                        el.getAttribute(
+                            'data-i18n'
+                        )
+                )
+            );
 
 
-            /*
-             * Update page title.
-             */
-            document.title =
-                lang === 'th'
-                    ? 'Teerasak Khompae - Portfolio'
-                    : 'Teerasak Khompae - Portfolio';
+        usedKeys.forEach((key) => {
 
+            ['th', 'en'].forEach((lang) => {
 
-            /*
-             * Find current translatable elements every time.
-             *
-             * This is safer than storing querySelectorAll once,
-             * especially if sections are dynamically added later.
-             */
-            const elements =
-                document.querySelectorAll('[data-i18n]');
-
-
-            elements.forEach((el) => {
-
-                const key =
-                    el.getAttribute('data-i18n');
-
-
-                /*
-                 * Check that the translation key REALLY exists.
-                 *
-                 * Do not use:
-                 *
-                 *     if (i18n[lang][key])
-                 *
-                 * because missing/empty values become difficult
-                 * to debug.
-                 */
                 if (
-                    Object.prototype.hasOwnProperty.call(
+                    !Object.prototype.hasOwnProperty.call(
                         i18n[lang],
                         key
                     )
                 ) {
 
-                    const changeText = () => {
-
-                        el.innerHTML =
-                            i18n[lang][key];
-
-                        el.style.opacity = '1';
-
-                    };
-
-
-                    if (animate) {
-
-                        el.style.opacity = '0';
-
-                        window.setTimeout(
-                            changeText,
-                            120
-                        );
-
-                    } else {
-
-                        changeText();
-
-                    }
-
-                } else {
-
-                    /*
-                     * Important:
-                     * Show a warning instead of silently ignoring
-                     * missing translation keys.
-                     */
-                    console.warn(
-                        `[i18n] Missing "${key}" in "${lang}" dictionary.`,
-                        el
+                    console.error(
+                        `[i18n] Missing key "${key}" for "${lang}".`
                     );
 
                 }
 
             });
 
+        });
 
-            /*
-             * Update toggle position.
-             *
-             * TH = unchecked
-             * EN = checked
-             */
-            toggle.checked =
-                lang === 'en';
+    }
 
 
-            /*
-             * Update TH / EN label appearance.
-             */
-            if (lang === 'th') {
+    validateTranslations();
 
-                labelTH.classList.add('lang-active');
-                labelTH.classList.remove('lang-inactive');
-
-                labelEN.classList.add('lang-inactive');
-                labelEN.classList.remove('lang-active');
-
-            } else {
-
-                labelEN.classList.add('lang-active');
-                labelEN.classList.remove('lang-inactive');
-
-                labelTH.classList.add('lang-inactive');
-                labelTH.classList.remove('lang-active');
-
-            }
-
-
-            /*
-             * Save selected language.
-             */
-            try {
-
-                localStorage.setItem(
-                    'portfolioLanguage',
-                    lang
-                );
-
-            } catch (error) {
-
-                console.warn(
-                    'Unable to save language preference.',
-                    error
-                );
-
-            }
-
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Language Toggle Event
-        |--------------------------------------------------------------------------
-        */
-
-        toggle.addEventListener(
-            'change',
-            function () {
-
-                const lang =
-                    this.checked
-                        ? 'en'
-                        : 'th';
-
-                updateLanguage(lang);
-
-            }
-        );
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Restore Saved Language
-        |--------------------------------------------------------------------------
-        */
-
-        let initialLanguage = 'th';
-
-        try {
-
-            const savedLanguage =
-                localStorage.getItem(
-                    'portfolioLanguage'
-                );
-
-            if (
-                savedLanguage === 'th' ||
-                savedLanguage === 'en'
-            ) {
-
-                initialLanguage =
-                    savedLanguage;
-
-            }
-
-        } catch (error) {
-
-            console.warn(
-                'Unable to read saved language preference.',
-                error
-            );
-
-        }
-
-
-        /*
-         * Load initial language without animation.
-         */
-        updateLanguage(
-            initialLanguage,
-            false
-        );
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Reveal Animation
-        |--------------------------------------------------------------------------
-        */
-
-        const observer =
-            new IntersectionObserver(
-
-                (entries) => {
-
-                    entries.forEach(
-                        (entry) => {
-
-                            if (
-                                entry.isIntersecting
-                            ) {
-
-                                entry.target
-                                    .classList
-                                    .add('active');
-
-                                /*
-                                 * Stop watching once revealed.
-                                 */
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-                            }
-
-                        }
-                    );
-
-                },
-
-                {
-                    threshold: 0.1
-                }
-
-            );
-
-
-        document
-            .querySelectorAll('.reveal')
-            .forEach(
-                (el) => observer.observe(el)
-            );
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Development Check
-        |--------------------------------------------------------------------------
-        |
-        | Checks all data-i18n keys against both languages.
-        | Missing keys will appear in browser console.
-        |
-        */
-
-        function validateTranslations() {
-
-            const usedKeys =
-                new Set(
-                    Array.from(
-                        document.querySelectorAll(
-                            '[data-i18n]'
-                        )
-                    ).map(
-                        (el) =>
-                            el.getAttribute(
-                                'data-i18n'
-                            )
-                    )
-                );
-
-
-            usedKeys.forEach(
-                (key) => {
-
-                    ['th', 'en'].forEach(
-                        (lang) => {
-
-                            if (
-                                !Object.prototype.hasOwnProperty.call(
-                                    i18n[lang],
-                                    key
-                                )
-                            ) {
-
-                                console.error(
-                                    `[i18n] Missing key "${key}" for language "${lang}".`
-                                );
-
-                            }
-
-                        }
-                    );
-
-                }
-            );
-
-        }
-
-
-        validateTranslations();
-
-    </script>
+</script>
 
 </body>
 </html>
